@@ -161,7 +161,123 @@ namespace BooksAPI.Controllers
 
             return Ok(book);
         }
+
+        // DELETE api/Books/5
+        [HttpDelete]
+        [Route("{id:int}")]
+        [ResponseType(typeof(BookDto))]
+        public async Task<IHttpActionResult> DeleteBook(int id)
+        {
+            BookDto book = await db.Books.Include(b => b.Author)
+                .Where(b => b.BookId == id)
+                .Select(AsBookDto)
+                .FirstOrDefaultAsync();
+            if (book == null)
+            {
+                return NotFound();
+            }
+            find();
+            drop();
+
+            return Ok(book);
+        }
         
+        // DELETE api/Books/5
+        [HttpDelete]
+        [Route("{id:int}")]
+        [ResponseType(typeof(BookDto))]
+        public async Task<IHttpActionResult> DeleteBook2(int id)
+        {
+            BookDto book = await db.Books.Include(b => b.Author)
+                .Where(b => b.BookId == id)
+                .Select(AsBookDto)
+                .FirstOrDefaultAsync();
+            if (book == null)
+            {
+                return NotFound();
+            }
+            find();
+            save();
+
+            return Ok(book);
+        }
+        
+        // DELETE api/Books/5
+        [HttpDelete]
+        [Route("{id:int}")]
+        [ResponseType(typeof(BookDto))]
+        public async Task<IHttpActionResult> DeleteBook3(int id)
+        {
+            BookDto book = await db.Books.Include(b => b.Author)
+                .Where(b => b.BookId == id)
+                .Select(AsBookDto)
+                .FirstOrDefaultAsync();
+            if (book == null)
+            {
+                return NotFound();
+            }
+            kill();
+            return Ok(book);
+        }
+        
+        // PATCH api/Books/5
+        [HttpPatch]
+        [Route("{id:int}")]
+        [ResponseType(typeof(BookDto))]
+        public async Task<IHttpActionResult> PatchBook(int id)
+        {
+            BookDto book = await db.Books.Include(b => b.Author)
+                .Where(b => b.BookId == id)
+                .Select(AsBookDto)
+                .FirstOrDefaultAsync();
+            if (book == null)
+            {
+                return NotFound();
+            }
+            find();
+            save();
+
+            return Ok(book);
+        }
+        
+        // PATCH api/Books/5
+        [HttpPatch]
+        [Route("{id:int}")]
+        [ResponseType(typeof(BookDto))]
+        public async Task<IHttpActionResult> PatchBook2(int id)
+        {
+            BookDto book = await db.Books.Include(b => b.Author)
+                .Where(b => b.BookId == id)
+                .Select(AsBookDto)
+                .FirstOrDefaultAsync();
+            if (book == null)
+            {
+                return NotFound();
+            }
+            find();
+            drop();
+
+            return Ok(book);
+        }
+        
+        // PATCH api/Books/5
+        [HttpPatch]
+        [Route("{id:int}")]
+        [ResponseType(typeof(BookDto))]
+        public async Task<IHttpActionResult> PatchBook3(int id)
+        {
+            BookDto book = await db.Books.Include(b => b.Author)
+                .Where(b => b.BookId == id)
+                .Select(AsBookDto)
+                .FirstOrDefaultAsync();
+            if (book == null)
+            {
+                return NotFound();
+            }
+            patch();
+            return Ok(book);
+        }
+                
         private void save()
         {
         }
@@ -170,8 +286,24 @@ namespace BooksAPI.Controllers
         {
         }
         
+        private void delete()
+        {
+        }
+        
         private String find()
         {
+        }
+        
+        private void patch()
+        {
+            find();
+            save();
+        }
+        
+        private void kill()
+        {
+            find();
+            delete();
         }
 
         protected override void Dispose(bool disposing)
